@@ -1,6 +1,11 @@
-<h2> Mi primer formulario reactivo </h2>
+<div class=" container" >
 
-<form id="frmJugadores" [formGroup]="frmJugadores" (ngSubmit)="frmJugadores.valid? submit(): false" >  
+  <h1 class = "title">Crear Juego</h1>
+  <br>
+
+<h2> Lista de jugadores </h2>
+
+<form  id="frmJugadores" [formGroup]="frmJugadores" (ngSubmit)="frmJugadores.valid? submit(): false" >  
 
     <select name = "jugadores" multiple class = "jugadores" formControlName = "jugadores"> 
       <option *ngFor= "let jugador of jugadores" [value] = "jugador.id">{{ jugador.name }} </option>
@@ -11,6 +16,7 @@
      *ngIf="frmJugadores.get('jugadores')?.hasError('required')"
      >Debes selecionar por lo menos un jugador</div>
     <br>
-    <button type = "submit" [disabled]="frmJugadores.invalid">crear juego</button>
+    <button  class="btn btn-primary" type = "submit" [disabled]="frmJugadores.invalid">crear juego</button>
 
 </form>
+</div>
