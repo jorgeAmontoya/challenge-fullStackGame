@@ -24,7 +24,7 @@ public class Juego extends AggregateEvent<JuegoId> {
         appendChange(new JuegoCreado(new Estado(Estado.Estados.CREADO))).apply();
         factory.jugadores().forEach(jugador -> appendChange(new JugadorAdicionado(
                 jugador.identity(),
-                jugador.alias(),
+                jugador.alias(), 
                 jugador.mazo()
         )).apply());
         subscribe(new JuegoEventChange(this));
