@@ -1,6 +1,6 @@
 package org.example.business.gateway.model;
 
-public class cartaMaestra {
+public class CartaMaestra {
 
     private String id;
     private Integer poder;

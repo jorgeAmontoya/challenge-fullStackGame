@@ -30,6 +30,16 @@ public class Mazo implements ValueObject<Mazo.Props> {
         };
     }
 
+    public Mazo retirarCarta(Carta cartaRetirada) {
+        var cartaId = cartaRetirada.value().cartaId().value();
+        this.cartas.removeIf(
+                carta -> cartaId.equals(carta.value().cartaId().value())
+        );
+        return new Mazo(this.cartas);
+
+    }
+
+
     public interface Props {
         Set<Carta> cartas();
         Integer cantidad();

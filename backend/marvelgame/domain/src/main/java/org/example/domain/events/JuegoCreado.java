@@ -2,16 +2,17 @@ package org.example.domain.events;
 
 import co.com.sofka.domain.generic.DomainEvent;
 import org.example.domain.values.Estado;
+import org.example.domain.values.JugadorId;
 
 public class JuegoCreado extends DomainEvent {
-    private final Estado estado;
-    public JuegoCreado(Estado estado) {
+    private final JugadorId jugadorPrincipal;
+    public JuegoCreado(JugadorId jugadorPrincipal) {
         super("marvelgame.JuegoCreado");
-        this.estado = estado;
+        this.jugadorPrincipal = jugadorPrincipal;
 
     }
 
-    public Estado getEstado() {
-        return estado;
+    public JugadorId getJugadorPrincipal() {
+        return jugadorPrincipal;
     }
 }

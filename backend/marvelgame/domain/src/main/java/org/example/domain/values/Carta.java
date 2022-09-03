@@ -9,10 +9,13 @@ public class Carta implements ValueObject<Carta.Props> {
     private final CartaMaestraId cartaId;
     private final Boolean estaHabilitada;
 
-    public Carta(Integer poder,  CartaMaestraId cartaId, Boolean estaHabilitada) {
+    private final Boolean estaOculta;
+
+    public Carta(CartaMaestraId cartaId,Integer poder, Boolean estaOculta,Boolean estaHabilitada) {
         this.poder = Objects.requireNonNull(poder);
         this.cartaId = Objects.requireNonNull(cartaId);
         this.estaHabilitada = Objects.requireNonNull(estaHabilitada);
+        this.estaOculta = Objects.requireNonNull(estaOculta);
 
         if (this.poder <= 0){
             throw new IllegalArgumentException("El poder de la carta no puede ser menor o igual a cero");

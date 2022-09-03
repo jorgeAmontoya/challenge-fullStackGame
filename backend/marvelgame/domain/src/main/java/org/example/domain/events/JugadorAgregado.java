@@ -4,12 +4,12 @@ import co.com.sofka.domain.generic.DomainEvent;
 import org.example.domain.values.JugadorId;
 import org.example.domain.values.Mazo;
 
-public class JugadorAdicionado extends DomainEvent {
+public class JugadorAgregado extends DomainEvent {
 
     private  final JugadorId identity;
     private final String alias;
     private final Mazo mazo;
-    public JugadorAdicionado(JugadorId identity, String alias, Mazo mazo) {
+    public JugadorAgregado(JugadorId identity, String alias, Mazo mazo) {
         super("marvelgame.jugadoradicionado");
         this.identity = identity;
         this.alias = alias;
@@ -20,7 +20,7 @@ public class JugadorAdicionado extends DomainEvent {
         return alias;
     }
 
-    public JugadorId getIdentity() {
+    public JugadorId getJuegoId() {
         return identity;
     }
 

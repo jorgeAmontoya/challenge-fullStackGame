@@ -1,6 +1,7 @@
 package org.example.domain;
 
 import co.com.sofka.domain.generic.Entity;
+import org.example.domain.values.Carta;
 import org.example.domain.values.JugadorId;
 import org.example.domain.values.Mazo;
 
@@ -24,4 +25,8 @@ public class Jugador extends Entity<JugadorId> {
     }
 
     public Mazo mazo(){return mazo;}
+
+    public void quitarCartaDeMazo(Carta carta) {
+        mazo = mazo.retirarCarta(carta);
+    }
 }
