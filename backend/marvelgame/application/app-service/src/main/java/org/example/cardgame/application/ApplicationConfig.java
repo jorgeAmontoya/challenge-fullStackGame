@@ -15,7 +15,7 @@ import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 import java.util.Arrays;
 
 @Configuration
-@ComponentScan(value="org.example.business.usecase",
+@ComponentScan(value="org.example.business.usercase",
         useDefaultFilters = false, includeFilters = @ComponentScan.Filter
         (type = FilterType.REGEX, pattern = ".*UseCase")
 )

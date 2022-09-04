@@ -9,13 +9,11 @@ import org.example.domain.values.JugadorId;
 import org.example.domain.values.Ronda;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class CrearRondaUseCase extends UseCaseForCommand<CrearRondaCommand> {
     private final JuegoDomainEventRepository repository;
-
     public CrearRondaUseCase(JuegoDomainEventRepository repository) {
         this.repository = repository;
     }
@@ -24,6 +22,8 @@ public class CrearRondaUseCase extends UseCaseForCommand<CrearRondaCommand> {
 
     @Override
     public Flux<DomainEvent> apply(Mono<CrearRondaCommand> iniciarJuegoCommand) {
+
+
 
         return iniciarJuegoCommand.flatMapMany((command) -> repository
                 .obtenerEventosPor(command.getJuegoId())
