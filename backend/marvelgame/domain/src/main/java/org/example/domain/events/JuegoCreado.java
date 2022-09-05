@@ -7,7 +7,7 @@ import org.example.domain.values.JugadorId;
 public class JuegoCreado extends DomainEvent {
     private final JugadorId jugadorPrincipal;
     public JuegoCreado(JugadorId jugadorPrincipal) {
-        super("marvelgame.JuegoCreado");
+        super("domain.JuegoCreado");
         this.jugadorPrincipal = jugadorPrincipal;
 
     }

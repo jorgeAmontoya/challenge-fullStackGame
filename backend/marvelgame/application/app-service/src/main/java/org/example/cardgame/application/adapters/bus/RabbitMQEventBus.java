@@ -5,6 +5,7 @@ import org.example.cardgame.application.ApplicationConfig;
 import org.example.cardgame.application.GsonEventSerializer;
 import org.example.cardgame.application.generic.EventBus;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.stereotype.Service;
 
 public class RabbitMQEventBus implements EventBus {
     private final RabbitTemplate rabbitTemplate;

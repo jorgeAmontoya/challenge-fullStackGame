@@ -12,14 +12,11 @@ public class Carta implements ValueObject<Carta.Props> {
     private final Boolean estaOculta;
 
     public Carta(CartaMaestraId cartaId,Integer poder, Boolean estaOculta,Boolean estaHabilitada) {
-        this.poder = Objects.requireNonNull(poder);
-        this.cartaId = Objects.requireNonNull(cartaId);
-        this.estaHabilitada = Objects.requireNonNull(estaHabilitada);
-        this.estaOculta = Objects.requireNonNull(estaOculta);
+        this.poder = poder;
+        this.cartaId = cartaId;
+        this.estaHabilitada = estaHabilitada;
+        this.estaOculta = estaOculta;
 
-        if (this.poder <= 0){
-            throw new IllegalArgumentException("El poder de la carta no puede ser menor o igual a cero");
-        }
     }
 
     @Override
@@ -36,16 +33,39 @@ public class Carta implements ValueObject<Carta.Props> {
             }
 
             @Override
+            public Boolean estaOculta() {
+                return estaOculta;
+            }
+
+            @Override
             public Boolean estaHabilitada() {
                 return estaHabilitada;
             }
         };
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Carta carta = (Carta) o;
+        return Objects.equals(cartaId, carta.cartaId) && Objects.equals(estaOculta, carta.estaOculta) && Objects.equals(estaHabilitada, carta.estaHabilitada) && Objects.equals(poder, carta.poder);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cartaId, estaOculta, estaHabilitada, poder);
+    }
+
+
+
+
+
     public interface Props {
 
        Integer poder();
         CartaMaestraId cartaId();
        Boolean estaHabilitada();
+        Boolean estaOculta();
     }
 }

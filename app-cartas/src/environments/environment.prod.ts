@@ -1,6 +1,8 @@
 // variables de configuracion usadas en el ambiente de producion
 export const environment = {
   production: true,
+  urlBase: 'http://localhost:8080/',
+
   urlService: 'http://angular.com',
   firebaseConfig : {
     apiKey: "AIzaSyCkKFQ-xugi92fHpMVFsg38W2cpsYwEFKg",

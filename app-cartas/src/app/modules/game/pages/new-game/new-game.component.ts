@@ -3,7 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/modules/shared/services/auth.service';
 import { jugadoresModel } from '../../models/jugadores.model';
+import { Usuario } from '../../models/usuario.model';
 import { JugadoresService } from '../../services/jugadores.service';
+import firebase from 'firebase/compat'
+import { Game } from '../../models/game.model';
 
 @Component({
   selector: 'app-new-game',
@@ -13,24 +16,37 @@ import { JugadoresService } from '../../services/jugadores.service';
 export class NewGameComponent implements OnInit {
 
   frmJugadores: FormGroup;
-  jugadores!: Array<jugadoresModel>;
+  jugadores!: Array<Usuario>;
+
+  currentUser!: firebase.User | null
 
   constructor(private jugadores$: JugadoresService, private auth$: AuthService) { 
     this.frmJugadores = this.createFormJugadores();
   }
 
 
-  ngOnInit(): void {
-    debugger;
-    this.jugadores = this.jugadores$.getJugadores();
-    console.log(this.jugadores);
-     
+  async ngOnInit(): Promise<void> {
+    this.jugadores  = await this.jugadores$.getJugadores();
+    this.currentUser= await this.auth$.getUserAuth();
+    this.jugadores = this.jugadores.filter(item => item.id !== this.currentUser?.uid);     
   }
 
   public submit(): void {
-    debugger;
+    const gamers =  this.frmJugadores.getRawValue();
+    gamers.jugadores.push(this.currentUser?.uid);
+    console.log("Submit", gamers);
+    this.jugadores$.game(gamers).subscribe({
+      next: (data: Game) => {
 
-    console.log("Submit", this.frmJugadores.getRawValue()) ;
+        // aqui llega algo con la  informacion que llega del backend
+        console.log("Game", data);
+      },
+
+      error: (err: any) => {
+        console.log (err)
+      },
+      complete:() => console.log("completed")
+    });
   }
 
   private createFormJugadores(): FormGroup {

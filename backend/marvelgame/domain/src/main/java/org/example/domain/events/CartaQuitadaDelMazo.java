@@ -15,7 +15,8 @@ public class CartaQuitadaDelMazo extends DomainEvent {
         this.carta = carta;
     }
 
-    public JugadorId getJugadorId() {
+    public JugadorId
+    getJugadorId() {
         return jugadorId;
     }
 

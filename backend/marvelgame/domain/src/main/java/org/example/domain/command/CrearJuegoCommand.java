@@ -12,10 +12,9 @@ public class CrearJuegoCommand extends Command {
     private   String jugadorPrincipalId;
 
 
-    /*public CrearJuegoCommand(String juegoId, Map<String, String> jugadores) {
-        this.juegoId = juegoId;
-        this.jugadores = jugadores;
-    }*/
+    public CrearJuegoCommand( ) {
+
+    }
 
     public void setJugadores(Map<String, String> jugadores) {
         this.jugadores = jugadores;

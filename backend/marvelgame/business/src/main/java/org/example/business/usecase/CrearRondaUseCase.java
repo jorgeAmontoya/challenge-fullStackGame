@@ -1,4 +1,4 @@
-package org.example.business.usercase;
+package org.example.business.usecase;
 
 import co.com.sofka.domain.generic.DomainEvent;
 import org.example.business.gateway.JuegoDomainEventRepository;

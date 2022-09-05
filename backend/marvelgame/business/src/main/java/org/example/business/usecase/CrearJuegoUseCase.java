@@ -1,4 +1,4 @@
-package org.example.business.usercase;
+package org.example.business.usecase;
 
 import co.com.sofka.domain.generic.DomainEvent;
 import org.example.business.gateway.ListaDeCartaService;
@@ -15,7 +15,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public abstract class CrearJuegoUseCase extends UseCaseForCommand<CrearJuegoCommand> {
+public  class CrearJuegoUseCase extends UseCaseForCommand<CrearJuegoCommand> {
 
     private final ListaDeCartaService listaDeCartaService;
 
@@ -48,16 +48,16 @@ public abstract class CrearJuegoUseCase extends UseCaseForCommand<CrearJuegoComm
 
     private Mazo generarMazo(List<CartaMaestra> cartas) {
         Collections.shuffle(cartas);
-        var mazoDelJugador = cartas.stream().limit(5)
+        var lista = cartas.stream().limit(5)
                 .map(carta -> new Carta( CartaMaestraId.of(carta.getId()), carta.getPoder(),false, true))
                 .collect(Collectors.toList());
 
-        cartas.removeIf(cartaMaestra -> mazoDelJugador.stream().anyMatch(carta ->{
+        cartas.removeIf(cartaMaestra -> lista.stream().anyMatch(carta ->{
             var id = carta.value().cartaId().value();
             return cartaMaestra.getId().equals(id);
 
         }));
-        return new Mazo(new HashSet<>(mazoDelJugador));
+        return new Mazo(new HashSet<>(lista));
 
     }
 }

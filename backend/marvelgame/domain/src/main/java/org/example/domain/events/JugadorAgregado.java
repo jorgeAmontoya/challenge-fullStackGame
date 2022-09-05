@@ -10,12 +10,15 @@ public class JugadorAgregado extends DomainEvent {
     private final String alias;
     private final Mazo mazo;
     public JugadorAgregado(JugadorId identity, String alias, Mazo mazo) {
-        super("marvelgame.jugadoradicionado");
+        super("domain.jugadoradicionado");
         this.identity = identity;
         this.alias = alias;
         this.mazo = mazo;
     }
 
+    public JugadorId getJugadorId() {
+        return identity;
+    }
     public String getAlias() {
         return alias;
     }

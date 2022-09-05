@@ -1,6 +1,6 @@
 package org.example.cardgame.application.handle;
 
-import org.example.business.usercase.CrearJuegoUseCase;
+import org.example.business.usecase.CrearJuegoUseCase;
 import org.example.domain.command.CrearJuegoCommand;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
@@ -20,7 +20,6 @@ public class CommandHandle {
     }
     @Bean
     public RouterFunction<ServerResponse> crear(CrearJuegoUseCase usecase) {
-
         return route(
                 POST("/juego/crear").and(accept(MediaType.APPLICATION_JSON)),
                 request -> usecase.andThen(integrationHandle)
