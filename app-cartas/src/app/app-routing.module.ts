@@ -8,19 +8,29 @@ import { AngularFireAuthGuard, redirectLoggedInTo, redirectUnauthorizedTo, } fro
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
 const redirectLoggedInToDashboard = () => redirectLoggedInTo(['game/new']);
+const redirectLoggedInToDashboardHome = () => redirectLoggedInTo(['crear']);
 
 //components
 import { NewGameComponent } from './modules/game/pages/new-game/new-game.component';
+import { HomeComponent } from './modules/game/pages/home/home.component';
 
-
+debugger;
 // se crean las rutas
 const routes: Routes = [
   {
+    
     path:'',
     component: LogInComponent,
     canActivate: [AngularFireAuthGuard],
-    data: {authGuardPipe: redirectLoggedInToDashboard},
+    data: {authGuardPipe: redirectLoggedInToDashboardHome},
   },
+  {
+    path: 'crear',
+    component: HomeComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: {authGuardPipe:  redirectUnauthorizedToLogin}
+  },
+
   {
     path:'game/new',
     component:NewGameComponent,
@@ -28,6 +38,7 @@ const routes: Routes = [
     data: {authGuardPipe: redirectUnauthorizedToLogin},
 
   }
+
 ];
 
 @NgModule({

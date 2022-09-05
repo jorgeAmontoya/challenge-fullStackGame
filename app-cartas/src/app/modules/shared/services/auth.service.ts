@@ -48,14 +48,17 @@ async getUserAuth() {
        console.log(error)
      
      });
-       
+
+     
+
    }
    private OAuthProvider(provider: AuthProvider){
     return this.afAuth.signInWithPopup(provider)
       .then((_res) => {
         this.gamers$.addGamer(_res.user);     
         this.ngZone.run(() => {
-          this.router.navigate(['game/new']);//redireccionamiento a el otro componente
+          //this.router.navigate(['game/new']);//redireccionamiento a el otro componente
+          this.router.navigate(['crear']);
         })
       }).catch((error) => {
         window.alert(error)

@@ -24,6 +24,9 @@ import { environment } from 'src/environments/environment';
 // components
 import { NewGameComponent } from './modules/game/pages/new-game/new-game.component';
 import { LogInComponent } from './modules/game/pages/log-in/log-in.component';
+import { HomeComponent } from './modules/game/pages/home/home.component';
+import { JuegosComponent } from './modules/game/pages/juegos/juegos.component';
+import { TableroComponent } from './modules/game/pages/tablero/tablero.component';
 
 
 @NgModule({
@@ -31,7 +34,10 @@ import { LogInComponent } from './modules/game/pages/log-in/log-in.component';
   declarations: [
     AppComponent,
     NewGameComponent,
-    LogInComponent
+    LogInComponent,
+    HomeComponent,
+    JuegosComponent,
+    TableroComponent
   ],
   imports: [
     BrowserModule,

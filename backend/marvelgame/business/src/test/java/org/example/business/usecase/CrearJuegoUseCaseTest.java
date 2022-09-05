@@ -36,7 +36,6 @@ class CrearJuegoUseCaseTest {
         command.getJugadores().put("J3", "Jorge");
         command.setJugadorPrincipalId("J1");
 
-        //¿Qué es lo que espera?
         when(service.obtenerCartasDeMarvel())
                 .thenReturn(CartasSet());
 
