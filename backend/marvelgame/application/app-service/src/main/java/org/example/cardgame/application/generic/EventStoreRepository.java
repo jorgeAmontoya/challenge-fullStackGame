@@ -10,4 +10,6 @@ public interface EventStoreRepository {
 
 
     Mono<Void> saveEvent(String aggregateName, String aggregateRootId, StoredEvent storedEvent);
+
 }
+

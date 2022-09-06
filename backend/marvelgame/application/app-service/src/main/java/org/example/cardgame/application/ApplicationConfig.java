@@ -1,33 +1,30 @@
 package org.example.cardgame.application;
 
-
-import org.example.business.usecase.IniciarJuegoUseCase;
 import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
+
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.reactive.CorsWebFilter;
 import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 
+
 import java.util.Arrays;
 
-@Configuration
-@ComponentScan(value="org.example.business.usecase",
 
+
+@Configuration
+@ComponentScan(value="org.example.cardgame.usecase",
         useDefaultFilters = false, includeFilters = @ComponentScan.Filter
         (type = FilterType.REGEX, pattern = ".*UseCase")
 )
 public class ApplicationConfig {
-
     public static final String EXCHANGE = "core-game";
 
-    /*@Autowired
-    IniciarJuegoUseCase juegoUseCase;*/
 
     @Bean
     public RabbitAdmin rabbitAdmin(RabbitTemplate rabbitTemplate) {
@@ -50,4 +47,5 @@ public class ApplicationConfig {
 
         return new CorsWebFilter(source);
     }
+
 }

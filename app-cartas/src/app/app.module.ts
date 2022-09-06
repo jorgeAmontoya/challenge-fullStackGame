@@ -27,6 +27,8 @@ import { LogInComponent } from './modules/game/pages/log-in/log-in.component';
 import { HomeComponent } from './modules/game/pages/home/home.component';
 import { JuegosComponent } from './modules/game/pages/juegos/juegos.component';
 import { TableroComponent } from './modules/game/pages/tablero/tablero.component';
+import { SpinnerComponent } from './modules/game/components/spinner/spinner.component';
+import { NavbarComponent } from './modules/game/components/navbar/navbar.component';
 
 
 @NgModule({
@@ -37,7 +39,9 @@ import { TableroComponent } from './modules/game/pages/tablero/tablero.component
     LogInComponent,
     HomeComponent,
     JuegosComponent,
-    TableroComponent
+    TableroComponent,
+    SpinnerComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

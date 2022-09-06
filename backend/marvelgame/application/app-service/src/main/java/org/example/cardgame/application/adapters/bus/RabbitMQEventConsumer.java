@@ -8,8 +8,10 @@ import org.springframework.amqp.rabbit.annotation.QueueBinding;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.messaging.Message;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
+
+@Component
 public class RabbitMQEventConsumer {
 
     private final GsonEventSerializer serializer;
@@ -25,7 +27,7 @@ public class RabbitMQEventConsumer {
     @RabbitListener(bindings = @QueueBinding(
             value = @Queue(value = "juego.handles", durable = "true"),
             exchange = @Exchange(value = ApplicationConfig.EXCHANGE, type = "topic"),
-            key = "domain.#"
+            key = "cardgame.#"
     ))
     public void receivedMessage(Message<String> message) {
         var notification = Notification.from(message.getPayload());
@@ -38,5 +40,7 @@ public class RabbitMQEventConsumer {
             e.printStackTrace();
         }
     }
+
+
 
 }

@@ -5,7 +5,6 @@ import com.google.gson.Gson;
 import java.time.Instant;
 
 public class Notification {
-
     private final String type;
     private final String body;
     private final Instant instant;
@@ -42,5 +41,4 @@ public class Notification {
     public static Notification from(String aNotification){
         return new Notification().deserialize(aNotification);
     }
-
 }

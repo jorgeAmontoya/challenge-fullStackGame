@@ -5,7 +5,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NewGameComponent } from './new-game.component';
 
 describe('NewGameComponent', () => {
-  debugger;
   let component: NewGameComponent;
   let fixture: ComponentFixture<NewGameComponent>;
 

@@ -20,7 +20,6 @@ export class HomeComponent implements OnInit {
 
   crearJuego(){
     //this.auth$.creacionJuego(); 
-debugger;
     this.router.navigate(['game/new']);//redireccionamiento a el otro componente
 
   }

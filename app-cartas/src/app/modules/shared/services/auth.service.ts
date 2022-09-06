@@ -24,8 +24,9 @@ export class AuthService {
        // .pipe(distinctUntilChanged((prev, curr) => _.isEqual(prev, curr)));
       }
 
-   logout(): void{
-    this.afAuth.signOut().then((_res) =>{
+   logout(){
+    return this.afAuth.signOut().then((_res) =>{
+      localStorage.removeItem('user');
       this.ngZone.run(() => {
         this.router.navigate(['']);
     })
@@ -33,6 +34,10 @@ export class AuthService {
 }
 
 
+get isLoggedIn(): boolean {
+  const user = JSON.parse(localStorage.getItem('user')!);
+  return user !== null && user.emailVerified !== false ? true : false;
+}
 
 async getUserAuth() {
   const userData = await this.afAuth.currentUser;

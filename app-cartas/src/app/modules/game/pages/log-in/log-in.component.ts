@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/modules/shared/services/auth.service';
   styleUrls: ['./log-in.component.scss']
 })
 export class LogInComponent implements OnInit {
+  spin: boolean = true;
 
   constructor(
     private auth$: AuthService
@@ -16,6 +17,7 @@ export class LogInComponent implements OnInit {
   }
 
   btnLogin(): void {
+    this.spin=false
     console.log('login button clicked');
     this.auth$.SigninWithGoogle(); 
   }

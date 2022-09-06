@@ -50,7 +50,6 @@ export class NewGameComponent implements OnInit {
   }
 
   private createFormJugadores(): FormGroup {
-    debugger;
 
     return new FormGroup({
       jugadores: new FormControl(null, [Validators.required])

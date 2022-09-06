@@ -1,0 +1,19 @@
+
+
+<header *ngIf="isLogged">
+	<div>
+		<nav>
+			<ul class="actions">
+				<li><a (click)="inicio()">Inicio</a></li>
+				<li><a (click)="nuevoJuego()">Nuevo juego</a></li>
+				<li><a (click)="list()">Lista de juegos</a></li>
+			</ul>
+			<ul class="info">
+				<li>Puntaje: {{puntaje}}</li>
+				<li><img src="{{user.picture}}" alt="" srcset=""></li>
+				<li>{{user.name}}</li>
+				<li><a (click)="logout()">Logout</a></li>
+			</ul>
+		</nav>
+	</div>
+</header>

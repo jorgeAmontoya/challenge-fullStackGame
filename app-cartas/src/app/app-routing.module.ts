@@ -14,7 +14,6 @@ const redirectLoggedInToDashboardHome = () => redirectLoggedInTo(['crear']);
 import { NewGameComponent } from './modules/game/pages/new-game/new-game.component';
 import { HomeComponent } from './modules/game/pages/home/home.component';
 
-debugger;
 // se crean las rutas
 const routes: Routes = [
   {

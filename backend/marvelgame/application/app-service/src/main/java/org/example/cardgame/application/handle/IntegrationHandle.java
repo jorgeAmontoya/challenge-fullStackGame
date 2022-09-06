@@ -4,13 +4,14 @@ import co.com.sofka.domain.generic.DomainEvent;
 import org.example.cardgame.application.generic.EventBus;
 import org.example.cardgame.application.generic.EventStoreRepository;
 import org.example.cardgame.application.generic.StoredEvent;
+import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.function.Function;
 
-public class IntegrationHandle implements Function<Flux<DomainEvent>, Mono<Void>> {
-
+@Component
+public class IntegrationHandle implements Function<Flux<DomainEvent>, Mono<Void> > {
     private final EventStoreRepository repository;
     private final StoredEvent.EventSerializer eventSerializer;
     private final EventBus eventBus;
@@ -36,4 +37,5 @@ public class IntegrationHandle implements Function<Flux<DomainEvent>, Mono<Void>
             callback.success();
         });
     }
+
 }

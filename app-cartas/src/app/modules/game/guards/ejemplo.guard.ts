@@ -11,7 +11,6 @@ export class EjemploGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     //codigo de validacion 
     const id = route.params['id'];
-    debugger;
     return route.params['id'] == '123'?true :false;
   }
   
