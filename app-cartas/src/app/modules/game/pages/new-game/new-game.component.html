@@ -1,28 +1,29 @@
 <app-navbar></app-navbar>
 
-  <h1 class = "title">Crear Juego</h1>
+<h1 class="title"> Crear Juego</h1>
+
+<div class="body">
 
   <div class=" container" >
 
-<h2> Lista de jugadores </h2>
+    <h2 class="title"> Lista de jugadores </h2>
 
+    <form  id="frmJugadores" [formGroup]="frmJugadores" (ngSubmit)="frmJugadores.valid? submit(): false" >  
 
+      <select name = "jugadores" multiple class = "jugadores" formControlName = "jugadores"> 
+        <option *ngFor= "let jugador of jugadores" [value] = "[jugador.id, jugador.name]" >{{ jugador.name }} </option>
+      </select>
+      <br>
+      <div class="error"
+        *ngIf="frmJugadores.get('jugadores')?.hasError('required')"
+        >Debes selecionar por lo menos un jugador
+    </div>
+      <br>
+      <button  class="btn btn-primary" type = "submit" [disabled]="frmJugadores.invalid" (click)="enviar()">crear juego</button>
+      <button mat-raised-button color="accent" class="btn btn-primary" type = "button" (click)="btnLogout()">logout</button>
 
+    </form>
 
-
-<form  id="frmJugadores" [formGroup]="frmJugadores" (ngSubmit)="frmJugadores.valid? submit(): false" >  
-
-    <select name = "jugadores" multiple class = "jugadores" formControlName = "jugadores"> 
-      <option *ngFor= "let jugador of jugadores" [value] = "jugador.id">{{ jugador.name }} </option>
-       
-    </select>
-    <br>
-    <div class="error"
-     *ngIf="frmJugadores.get('jugadores')?.hasError('required')"
-     >Debes selecionar por lo menos un jugador</div>
-    <br>
-    <button  class="btn btn-primary" type = "submit" [disabled]="frmJugadores.invalid">crear juego</button>
-    <button mat-raised-button color="accent" class="btn btn-primary" type = "button" (click)="btnLogout()">logout</button>
-
-</form>
+   <!-- <button (click)="enviar()">enviar</button>-->
+  </div>
 </div>

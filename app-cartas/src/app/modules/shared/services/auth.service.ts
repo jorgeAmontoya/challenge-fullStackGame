@@ -63,7 +63,7 @@ async getUserAuth() {
         this.gamers$.addGamer(_res.user);     
         this.ngZone.run(() => {
           //this.router.navigate(['game/new']);//redireccionamiento a el otro componente
-          this.router.navigate(['crear']);
+          this.router.navigate(['home']);
         })
       }).catch((error) => {
         window.alert(error)

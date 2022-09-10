@@ -10,17 +10,18 @@ import { AuthService } from 'src/app/modules/shared/services/auth.service';
 export class NavbarComponent implements OnInit {
 
   constructor(private router: Router, private authService: AuthService) { }
-  isLogged: boolean = this.authService.isLoggedIn;
+  isLogged: boolean = true;//this.authService.isLoggedIn;
+  //isLogged: boolean = this.authService.isLoggedIn;
   user: any = JSON.parse(localStorage.getItem('user')!);
   puntaje: number = +JSON.parse(localStorage.getItem('puntaje')!);
 
   ngOnInit(): void {
   }
   inicio(){
-    this.router.navigate(['crear'])
+    this.router.navigate(['home'])
   }
-  list(){
-    this.router.navigate(['list'])
+  listaJugadores(){
+    this.router.navigate(['listaJugadores'])
   }
   nuevoJuego(){
     this.router.navigate(['game/new'])

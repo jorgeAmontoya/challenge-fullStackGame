@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
   }
 
   listgames(){
-    
+    this.router.navigate(['listaJugadores']);
   };
 
 }

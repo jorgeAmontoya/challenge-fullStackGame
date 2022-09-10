@@ -1,43 +1,30 @@
-// sistema de rutas
-// librerias
+// Libraries
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EjemploGuard } from './modules/game/guards/ejemplo.guard';
-import { LogInComponent } from './modules/game/pages/log-in/log-in.component';
-import { AngularFireAuthGuard, redirectLoggedInTo, redirectUnauthorizedTo, } from '@angular/fire/compat/auth-guard';
+import { LogInComponent } from './auth-login/log-in/log-in.component'; 
+
+
+// Components
+
+
+import {
+  AngularFireAuthGuard,
+  redirectLoggedInTo,
+  redirectUnauthorizedTo,
+} from '@angular/fire/compat/auth-guard';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
-const redirectLoggedInToDashboard = () => redirectLoggedInTo(['game/new']);
-const redirectLoggedInToDashboardHome = () => redirectLoggedInTo(['crear']);
+const redirectLoggedInToDashboard = () => redirectLoggedInTo(['home']);
 
-//components
-import { NewGameComponent } from './modules/game/pages/new-game/new-game.component';
-import { HomeComponent } from './modules/game/pages/home/home.component';
-
-// se crean las rutas
 const routes: Routes = [
+
   {
-    
-    path:'',
+    path: '',
     component: LogInComponent,
     canActivate: [AngularFireAuthGuard],
-    data: {authGuardPipe: redirectLoggedInToDashboardHome},
+    data: { authGuardPipe: redirectLoggedInToDashboard },
   },
-  {
-    path: 'crear',
-    component: HomeComponent,
-    canActivate: [AngularFireAuthGuard],
-    data: {authGuardPipe:  redirectUnauthorizedToLogin}
-  },
-
-  {
-    path:'game/new',
-    component:NewGameComponent,
-    canActivate: [AngularFireAuthGuard],
-    data: {authGuardPipe: redirectUnauthorizedToLogin},
-
-  }
-
+ 
 ];
 
 @NgModule({

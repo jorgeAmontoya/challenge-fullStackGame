@@ -1,0 +1,41 @@
+.row {
+	width: 90%;
+}
+
+.action{
+	height: 48px;
+	display: flex;
+    align-items: center;
+}
+.title{
+    background-color: rgb(171, 245, 245);
+    text-align: center;
+
+}
+.container{
+    width: 100%;
+	height: 100vh;
+	background: url(https://p4.wallpaperbetter.com/wallpaper/358/703/794/avengers-hd-wallpaper-preview.jpg);
+	background-position: bottom;
+	//background-size: cover;
+	background-repeat:initial;
+
+	
+	
+}
+.inner-adjust{
+    background-color: rgb(236, 237, 240);
+	text-align: center;
+}
+
+.list-group{
+	position: relative;
+	margin-top: 20px;
+	top: auto;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	flex-wrap: nowrap;
+	}
+
