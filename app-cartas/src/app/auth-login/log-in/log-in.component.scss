@@ -1,26 +1,34 @@
-
-.body{
-
-    width: 100%;
-	height: 100vh;
-	//background: url(https://wallpaperaccess.com/full/54694.jpg);
-	background: url(https://p4.wallpaperbetter.com/wallpaper/358/703/794/avengers-hd-wallpaper-preview.jpg);
-	background-position: bottom;
-	//background-size: cover;
-	background-repeat:initial;
-
-}
-.container{
-    width: max-content;
-	margin: auto;
-
-
-}
 .title{
     background-color: rgb(171, 245, 245);
     text-align: center;
+}
+
+.container{
+
+    width: 100% !important;
+	height: 100vh;
+	//display: flex;
+	//background: url(https://wallpaperaccess.com/full/54694.jpg);
+	
+	background: url(../../../assets/imagenes/doctorString.jpg);
+	//background-position: bottom;
+	//background-size: cover;
+	background-repeat:initial;
+	background-color: #071426;
+
 
 }
+
+video{
+	display: flex;
+    margin-left: 35%;
+    width: 100;
+    background-color: #0714266c;
+    border-radius: 9px;
+
+ } 
+
+
 
 .Login {
 	width: 400px;

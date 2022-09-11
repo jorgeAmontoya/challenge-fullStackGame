@@ -4,12 +4,21 @@
     width: 100%;
 	height: 100vh;
 	//background: url(https://wallpaperaccess.com/full/54694.jpg);
-	background: url(https://p4.wallpaperbetter.com/wallpaper/358/703/794/avengers-hd-wallpaper-preview.jpg);
+	//background: url(https://p4.wallpaperbetter.com/wallpaper/358/703/794/avengers-hd-wallpaper-preview.jpg);
+	background:url(../../../../../assets/imagenes/33a18cc7d84157423cb851adbe13760d.jpg);
 	background-position: bottom;
 	//background-size: cover;
 	background-repeat:initial;
 
 }
+video{
+	display: flex;
+    margin-left: 40%;
+    width: 100;
+    background-color: #0714266c;
+    border-radius: 9px;
+    transform: rotate(0.75turn);
+ } 
 .container{
     background-color: rgb(241, 247, 247);
     text-align: center;
