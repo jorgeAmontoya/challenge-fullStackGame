@@ -23,13 +23,14 @@ export class JugadoresService {
      }
 
 
-  game(gamers: Array<string>):Observable<Game>  {
-  return this.http.post<Game>(`${environment.urlBase}/game`, {gamers}, {headers: {
+ /* game(gamers: Array<string>):Observable<Game>  {
+    debugger;
+  return this.http.post<Game>(`${environment.urlBase}/game/`, {gamers}, {headers: {
       'Content-Type': 'application/json'
    }
   });
 
-  }
+  }*/
 
 async getJugadores():Promise <Array<Usuario>>{
   const result = await  new Promise<Usuario[]>((resolve, reject) => {

@@ -1,23 +1,22 @@
-.title{
-    background-color: rgb(171, 245, 245);
-    text-align: center;
-}
 
 .container{
 
     width: 100% !important;
 	height: 100vh;
-	//display: flex;
-	//background: url(https://wallpaperaccess.com/full/54694.jpg);
-	
+	display: flex;	
 	background: url(../../../assets/imagenes/doctorString.jpg);
-	//background-position: bottom;
-	//background-size: cover;
-	background-repeat:initial;
+	background-position: bottom;
+	background-size: auto;
+	background-repeat:space;
 	background-color: #071426;
-
+	
 
 }
+.title{
+    background-color: rgb(171, 245, 245);
+    text-align: center;
+}
+
 
 video{
 	display: flex;

@@ -8,7 +8,7 @@ import { AuthService } from 'src/app/modules/shared/services/auth.service';
   styleUrls: ['./log-in.component.scss']
 })
 export class LogInComponent implements OnInit {
-  spin: boolean = true;
+  //spin: boolean = true;
 
   constructor(
     private auth$: AuthService

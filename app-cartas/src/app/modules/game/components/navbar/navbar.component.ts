@@ -24,7 +24,7 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['listaJugadores'])
   }
   nuevoJuego(){
-    this.router.navigate(['game/new'])
+    this.router.navigate(['new'])
   }
   logout(){
     this.authService.logout()

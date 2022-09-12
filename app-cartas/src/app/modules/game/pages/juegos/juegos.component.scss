@@ -1,13 +1,11 @@
-.image1{
 
-
-}
 .card {
+    background : url(https://p4.wallpaperbetter.com/wallpaper/358/703/794/avengers-hd-wallpaper-preview.jpg);
+
     width: 100vw;
-    height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: row;
-    background : url(https://p4.wallpaperbetter.com/wallpaper/358/703/794/avengers-hd-wallpaper-preview.jpg);
     flex-wrap: wrap;
     border-radius: 20px;
     transition: all .3s;
@@ -18,7 +16,7 @@
     width: 190px;
  height: 254px;
  background-color: #93dcee;
-  border-radius:9px;
+  border-radius:6px;
  transition: all .2s;
  margin: 9px;
 
@@ -38,6 +36,8 @@
     text-align: center;
 
 }
+
+
 
 
 

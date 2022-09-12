@@ -22,12 +22,12 @@ const redirectLoggedInToDashboard = () => redirectLoggedInTo(['home']);
 
 const routes: Routes = [
 
-  {
+  /*{
     path: '',
     component: LogInComponent,
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectLoggedInToDashboard },
-  },
+  },*/
   {
     path: 'home',
     component: HomeComponent,
@@ -35,7 +35,7 @@ const routes: Routes = [
     data: { authGuardPipe: redirectUnauthorizedToLogin },
   },
   {
-    path: 'game/new',
+    path: 'new',
     component: NewGameComponent,
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToLogin },
