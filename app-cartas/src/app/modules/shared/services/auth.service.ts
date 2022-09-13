@@ -33,6 +33,12 @@ export class AuthService {
   });
 }
 
+get user() {
+  if (this.isLoggedIn) {
+    return JSON.parse(localStorage.getItem('user')!);
+  }
+  throw new Error("No found uid");
+}
 
 get isLoggedIn(): boolean {
   const user = JSON.parse(localStorage.getItem('user')!);
