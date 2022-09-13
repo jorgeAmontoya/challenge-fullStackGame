@@ -15,6 +15,7 @@ public class CrearJuegoCommand extends Command {
         return jugadores;
     }
 
+
     public void setJugadores(Map<String, String> jugadores) {
         this.jugadores = jugadores;
     }

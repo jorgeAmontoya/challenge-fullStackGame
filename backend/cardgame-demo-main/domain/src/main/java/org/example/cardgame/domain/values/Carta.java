@@ -11,14 +11,14 @@ public class Carta implements ValueObject<Carta.Props>, Comparable<Carta> {
     private final Boolean estaHabilitada;
     private final Integer poder;
 
-    private final String uri;
+    private final String url;
 
-    public Carta(CartaMaestraId cartaId, Integer poder, Boolean estaOculta, Boolean estaHabilitada,  String uri) {
+    public Carta(CartaMaestraId cartaId, Integer poder, Boolean estaOculta, Boolean estaHabilitada, String url) {
         this.cartaId = cartaId;
         this.estaOculta = estaOculta;
         this.estaHabilitada = estaHabilitada;
         this.poder = poder;
-        this.uri = uri;
+        this.url = url;
     }
 
     @Override
@@ -44,8 +44,7 @@ public class Carta implements ValueObject<Carta.Props>, Comparable<Carta> {
                 return estaHabilitada;
             }
 
-            @Override
-            public String uri() {return uri;}
+            public String url() {return url;}
         };
     }
 
@@ -67,16 +66,18 @@ public class Carta implements ValueObject<Carta.Props>, Comparable<Carta> {
         return this.poder - carta.poder;
     }
 
+
     public interface Props {
 
         CartaMaestraId cartaId();
 
+
         Integer poder();
+
 
         Boolean estaOculta();
 
         Boolean estaHabilitada();
-
-        String uri();
+        String url();
     }
 }

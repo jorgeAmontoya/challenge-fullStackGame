@@ -6,6 +6,7 @@ import org.example.cardgame.domain.events.*;
 import java.util.HashMap;
 import java.util.Objects;
 
+
 public class JuegoEventChange extends EventChange {
 
     public JuegoEventChange(Juego juego) {
@@ -39,8 +40,7 @@ public class JuegoEventChange extends EventChange {
             if(Boolean.FALSE.equals(juego.tablero.estaHabilitado())){
                 throw new IllegalArgumentException("No se puedo apostar porque el tablero no esta habilitado");
             }
-            juego.tablero.adicionarPartida(event.getJugadorId(), event.getCarta());
-        });
+            juego.tablero.adicionarPartida(event.getJugadorId(), event.getCarta());        });
 
         apply((CartaQuitadaDelTablero event) -> {
             juego.tablero.quitarCarta(event.getJugadorId(), event.getCarta());
@@ -51,6 +51,9 @@ public class JuegoEventChange extends EventChange {
         });
 
         apply((RondaIniciada event) -> {
+            if(Objects.isNull(juego.ronda)){
+                throw new IllegalArgumentException("Debe existir una ronda creada");
+            }
             juego.ronda = juego.ronda.iniciarRonda();
             juego.tablero.habilitarApuesta();
         });

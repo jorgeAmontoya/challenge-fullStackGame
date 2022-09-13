@@ -11,7 +11,6 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.reactive.CorsWebFilter;
 import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
-import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 
 import java.util.Arrays;
 
@@ -26,11 +25,6 @@ public class ApplicationConfig {
         var admin =  new RabbitAdmin(rabbitTemplate);
         admin.declareExchange(new TopicExchange(EXCHANGE));
         return admin;
-    }
-
-    @Bean
-    public ServerEndpointExporter serverEndpointExporter() {
-        return new ServerEndpointExporter();
     }
 
 

@@ -13,6 +13,7 @@ public class JuegoFinalizado extends DomainEvent {
         this.alias = alias;
     }
 
+
     public JugadorId getJugadorId() {
         return jugadorId;
     }

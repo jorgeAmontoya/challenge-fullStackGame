@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+
 public class Juego extends AggregateEvent<JuegoId> {
 
     protected Map<JugadorId, Jugador> jugadores;
@@ -20,6 +21,7 @@ public class Juego extends AggregateEvent<JuegoId> {
     protected Ronda ronda;
 
     protected JugadorId jugadorPrincipal;
+
 
     public Juego(JuegoId id, JugadorId uid, JugadorFactory jugadorFactory) {
         super(id);
@@ -36,24 +38,29 @@ public class Juego extends AggregateEvent<JuegoId> {
         subscribe(new JuegoEventChange(this));
     }
 
+
     public static Juego from(JuegoId juegoId, List<DomainEvent> events) {
         var juego = new Juego(juegoId);
         events.forEach(juego::applyEvent);
         return juego;
     }
 
+
     public void crearTablero() {
         var id = new TableroId();
         appendChange(new TableroCreado(id, jugadores.keySet())).apply();
     }
 
+
     public void crearRonda(Ronda ronda, Integer tiempo) {
         appendChange(new RondaCreada(ronda, tiempo)).apply();
     }
 
+
     public void cambiarTiempoDelTablero(TableroId tableroId, Integer tiempo) {
         appendChange(new TiempoCambiadoDelTablero(tableroId, tiempo)).apply();
     }
+
 
     public void ponerCartaEnTablero(TableroId tableroId, JugadorId jugadorId, Carta carta) {
         appendChange(new CartaPuestaEnTablero(tableroId, jugadorId, carta)).apply();
@@ -64,23 +71,6 @@ public class Juego extends AggregateEvent<JuegoId> {
         appendChange(new CartaQuitadaDelTablero(tableroId, jugadorId, carta)).apply();
     }
 
-    public void iniciarRonda() {
-        appendChange(new RondaIniciada()).apply();
-    }
-
-    public void asignarCartasAGanador(JugadorId ganadorId, Integer puntos, Set<Carta> cartasApuesta) {
-        appendChange(new CartasAsignadasAJugador(ganadorId, puntos, cartasApuesta)).apply();
-    }
-
-
-    public void terminarRonda(TableroId tableroId, Set<JugadorId> jugadorIds) {
-        appendChange(new RondaTerminada(tableroId, jugadorIds)).apply();
-
-    }
-
-    public void finalizarJuego(JugadorId jugadorId, String alias) {
-        appendChange(new JuegoFinalizado(jugadorId, alias)).apply();
-    }
 
     public Ronda ronda() {
         return ronda;
@@ -94,5 +84,26 @@ public class Juego extends AggregateEvent<JuegoId> {
 
     public Map<JugadorId, Jugador> jugadores() {
         return jugadores;
+    }
+
+
+    public void iniciarRonda() {
+        appendChange(new RondaIniciada()).apply();
+    }
+
+
+
+    public void asignarCartasAGanador(JugadorId ganadorId, Integer puntos, Set<Carta> cartasApuesta) {
+        appendChange(new CartasAsignadasAJugador(ganadorId, puntos, cartasApuesta)).apply();
+    }
+
+    public void terminarRonda(TableroId tableroId, Set<JugadorId> jugadorIds) {
+        appendChange(new RondaTerminada(tableroId, jugadorIds)).apply();
+
+    }
+
+    public void finalizarJuego(JugadorId jugadorId, String alias) {
+        appendChange(new JuegoFinalizado(jugadorId, alias)).apply();
+
     }
 }

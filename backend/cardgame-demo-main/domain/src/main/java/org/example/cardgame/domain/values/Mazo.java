@@ -6,14 +6,16 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+
 public class Mazo implements ValueObject<Mazo.Props> {
 
-    private final Set<Carta> cartas;
+    private final Set<Carta> catas;
     private final Integer cantidad;
 
-    public Mazo(Set<Carta> cartas) {
-        this.cartas = cartas;
-        this.cantidad = cartas.size();
+
+    public Mazo(Set<Carta> catas) {
+        this.catas = catas;
+        this.cantidad = catas.size();
     }
 
     @Override
@@ -21,7 +23,7 @@ public class Mazo implements ValueObject<Mazo.Props> {
         return new Props() {
             @Override
             public Set<Carta> cartas() {
-                return cartas;
+                return catas;
             }
 
             @Override
@@ -31,23 +33,27 @@ public class Mazo implements ValueObject<Mazo.Props> {
         };
     }
 
+
     public Mazo nuevaCarta(Carta carta) {
-        var cartas = new HashSet<>(this.cartas);
-        cartas.add(carta);
-        return new Mazo(cartas);
+        var catas = new HashSet<>(this.catas);
+        catas.add(carta);
+        return new Mazo(catas);
     }
+
 
     public Mazo retirarCarta(Carta cartaRetirada) {
         var cartaId =  cartaRetirada.value().cartaId().value();
-        var nuevoMazo = this.cartas.stream()
+        var nuevoMazo = this.catas.stream()
                 .filter(carta -> !cartaId.equals(carta.value().cartaId().value()))
                 .collect(Collectors.toCollection(HashSet::new));
         return new Mazo(nuevoMazo);
     }
 
+
     public interface Props {
 
         Set<Carta> cartas();
+
 
         Integer cantidad();
     }

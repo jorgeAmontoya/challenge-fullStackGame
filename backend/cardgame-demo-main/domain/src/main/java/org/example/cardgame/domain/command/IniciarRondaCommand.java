@@ -2,7 +2,6 @@ package org.example.cardgame.domain.command;
 
 import co.com.sofka.domain.generic.Command;
 
-
 public class IniciarRondaCommand extends Command {
     private String juegoId;
 

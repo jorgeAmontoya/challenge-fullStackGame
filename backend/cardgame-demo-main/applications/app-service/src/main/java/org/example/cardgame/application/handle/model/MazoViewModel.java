@@ -30,14 +30,14 @@ public class MazoViewModel {
         private  Boolean estaHabilitada;
         private  Integer poder;
 
-        private String uri;
+        private String url;
 
-        public String getUri() {
-            return uri;
+        public String getUrl() {
+            return url;
         }
 
-        public void setUri(String uri) {
-            this.uri = uri;
+        public void setUrl(String url) {
+            this.url = url;
         }
 
         public String getCartaId() {

@@ -1,11 +1,22 @@
-package org.example.cardgame.usecase.usecase;
+package org.example.cardgame.usecase;
 
 
 import co.com.sofka.domain.generic.DomainEvent;
 import org.example.cardgame.domain.command.PonerCartaEnTablero;
-import org.example.cardgame.domain.events.*;
-import org.example.cardgame.domain.values.*;
-import org.example.cardgame.usecase.gateway.JuegoDomainEventRepository;
+import org.example.cardgame.domain.events.CartaPuestaEnTablero;
+import org.example.cardgame.domain.events.CartaQuitadaDelMazo;
+import org.example.cardgame.domain.events.JuegoCreado;
+import org.example.cardgame.domain.events.JugadorAgregado;
+import org.example.cardgame.domain.events.RondaCreada;
+import org.example.cardgame.domain.events.RondaIniciada;
+import org.example.cardgame.domain.events.TableroCreado;
+import org.example.cardgame.domain.values.Carta;
+import org.example.cardgame.domain.values.CartaMaestraId;
+import org.example.cardgame.domain.values.JugadorId;
+import org.example.cardgame.domain.values.Mazo;
+import org.example.cardgame.domain.values.Ronda;
+import org.example.cardgame.domain.values.TableroId;
+import org.example.cardgame.gateway.JuegoDomainEventRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,7 +32,7 @@ import java.util.Set;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class PonerCartaEnTableroUseCaseTest {
+public class PonerCartaEnTableroUseCaseTest {
 
     @Mock
     private JuegoDomainEventRepository repository;
@@ -33,35 +44,32 @@ class PonerCartaEnTableroUseCaseTest {
     void ponerCarta() {
         //arrange
         var command = new PonerCartaEnTablero();
-        command.setCartaId("set01");
-        command.setJuegoId("set02");
-        command.setJugadorId("set03");
-        when(repository.obtenerEventosPor("set02")).thenReturn(history());
+        command.setCartaId("xxxxx");
+        command.setJuegoId("fffff");
+        command.setJugadorId("yyyyy");
+        when(repository.obtenerEventosPor("fffff")).thenReturn(history());
 
         StepVerifier.create(useCase.apply(Mono.just(command)))//act
                 .expectNextMatches(domainEvent -> {
                     var event = (CartaPuestaEnTablero) domainEvent;
-                    Assertions.assertEquals("set03", event.getJugadorId().value());
-                    return "set01".equals(event.getCarta().value().cartaId().value());
+                    Assertions.assertEquals("yyyyy", event.getJugadorId().value());
+                    return "xxxxx".equals(event.getCarta().value().cartaId().value());
                 })
                 .expectNextMatches(domainEvent -> {
                     var event = (CartaQuitadaDelMazo) domainEvent;
-                    Assertions.assertEquals("set03", event.getJugadorId().value());
-                    return "set01".equals(event.getCarta().value().cartaId().value());
-                })
+                    Assertions.assertEquals("yyyyy", event.getJugadorId().value());
+                    return "xxxxx".equals(event.getCarta().value().cartaId().value());                    })
                 .expectComplete()
                 .verify();
     }
 
     private Flux<DomainEvent> history() {
-        var jugadorId = JugadorId.of("set03");
+        var jugadorId = JugadorId.of("yyyyy");
         var jugador2Id = JugadorId.of("hhhhhh");
         var cartas = Set.of(new Carta(
-                CartaMaestraId.of("set01"),
+                CartaMaestraId.of("xxxxx"),
                 20,
-                false,
-                true,
-                "www"
+                false, true,"urls"
         ));
         var ronda = new Ronda(1, Set.of(jugadorId, jugador2Id));
         return Flux.just(

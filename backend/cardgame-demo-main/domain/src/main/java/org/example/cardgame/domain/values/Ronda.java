@@ -4,10 +4,12 @@ import co.com.sofka.domain.generic.ValueObject;
 
 import java.util.Set;
 
+
 public class Ronda implements ValueObject<Ronda.Props> {
     private final Set<JugadorId> jugadores;
     private final Integer numero;
     private final Boolean estaIniciada;
+
 
     public Ronda(Integer numero, Set<JugadorId> jugadores) {
         this.jugadores = jugadores;
@@ -18,7 +20,7 @@ public class Ronda implements ValueObject<Ronda.Props> {
     private Ronda(Integer numero, Set<JugadorId> jugadores, Boolean estaIniciada) {
         this.jugadores = jugadores;
         this.numero = numero;
-        this.estaIniciada = estaIniciada;
+        this.estaIniciada = estaIniciada;//TODO:CAMBIADO PUEDE SE FALSE
         if(numero <= 0){
             throw new IllegalArgumentException("El numero de la ronda debe no puede ser cero o negativo");
         }
@@ -27,16 +29,18 @@ public class Ronda implements ValueObject<Ronda.Props> {
         }
     }
 
+
     public Ronda iniciarRonda() {
         return new Ronda(this.numero, this.jugadores, true);
     }
+
 
     public Ronda terminarRonda() {
         return new Ronda(this.numero, this.jugadores, false);
     }
 
+
     public Ronda incrementarRonda(Set<JugadorId> jugadores) {
-        System.out.println("nueva ronda");
         return new Ronda(this.numero + 1, jugadores, false);
     }
 
@@ -59,6 +63,8 @@ public class Ronda implements ValueObject<Ronda.Props> {
             }
         };
     }
+
+
 
     public interface Props {
 

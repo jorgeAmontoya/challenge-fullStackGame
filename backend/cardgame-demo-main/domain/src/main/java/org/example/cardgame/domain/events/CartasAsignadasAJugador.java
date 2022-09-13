@@ -18,13 +18,16 @@ public class CartasAsignadasAJugador extends DomainEvent {
         this.cartasApuesta = cartasApuesta;
     }
 
+
     public Integer getPuntos() {
         return puntos;
     }
 
+
     public JugadorId getGanadorId() {
         return ganadorId;
     }
+
 
     public Set<Carta> getCartasApuesta() {
         return cartasApuesta;

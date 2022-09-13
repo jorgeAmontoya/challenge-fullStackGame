@@ -4,12 +4,12 @@ import co.com.sofka.domain.generic.DomainEvent;
 import org.example.cardgame.domain.values.JugadorId;
 import org.example.cardgame.domain.values.Mazo;
 
-import javax.xml.xpath.XPathEvaluationResult;
 
 public class JugadorAgregado extends DomainEvent {
     private final JugadorId identity;
     private final String alias;
     private final Mazo mazo;
+
 
     public JugadorAgregado(JugadorId identity, String alias, Mazo mazo) {
         super("cardgame.jugadoragregado");
@@ -21,10 +21,10 @@ public class JugadorAgregado extends DomainEvent {
     public JugadorId getJugadorId() {
         return identity;
     }
-
     public JugadorId getJuegoId() {
         return identity;
     }
+
 
     public String getAlias() {
         return alias;
@@ -33,6 +33,4 @@ public class JugadorAgregado extends DomainEvent {
     public Mazo getMazo() {
         return mazo;
     }
-
-
 }

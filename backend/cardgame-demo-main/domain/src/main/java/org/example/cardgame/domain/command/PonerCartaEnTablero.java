@@ -2,6 +2,7 @@ package org.example.cardgame.domain.command;
 
 import co.com.sofka.domain.generic.Command;
 
+
 public class PonerCartaEnTablero extends Command {
     private String jugadorId;
     private String cartaId;
@@ -11,10 +12,10 @@ public class PonerCartaEnTablero extends Command {
         return jugadorId;
     }
 
-
     public void setJugadorId(String jugadorId) {
         this.jugadorId = jugadorId;
     }
+
 
     public String getCartaId() {
         return cartaId;

@@ -31,6 +31,9 @@ public class GameMaterializeHandle {
 
     @EventListener
     public void handleJuegoCreado(JuegoCreado event) {
+        /**
+         * Gameview en la base de datos mongodb
+         */
         var data = new HashMap<>();
         data.put("_id", event.aggregateRootId());
         data.put("fecha", Instant.now());
@@ -52,6 +55,102 @@ public class GameMaterializeHandle {
         data.inc("cantidadJugadores");
         template.updateFirst(getFilterByAggregateId(event), data, COLLECTION_VIEW).block();
     }
+
+    @EventListener
+    public void handleTableroCreado(TableroCreado event) {
+        var data = new Update();
+        var jugadores = event.getJugadorIds().stream()
+                .map(Identity::value)
+                .collect(Collectors.toList());
+
+        data.set("fecha", Instant.now());
+        data.set("tablero.id", event.getTableroId().value());
+        data.set("tablero.cartas", new HashMap<>());
+        data.set("tablero.jugadores", jugadores);
+        data.set("tablero.habilitado", false);
+        data.set("iniciado", true);
+        template.updateFirst(getFilterByAggregateId(event),data, COLLECTION_VIEW)
+                .block();
+    }
+
+    @EventListener
+    public void handleCartaPuestaEnTablero(CartaPuestaEnTablero event) {
+        var data = new Update();
+        var document = new Document();
+        var carta = event.getCarta().value();
+        var jugadorId = event.getJugadorId().value();
+        document.put("cartaId", carta.cartaId().value());
+        document.put("estaOculta", carta.estaOculta());
+        document.put("poder", carta.poder());
+        document.put("estaHabilitada", carta.estaHabilitada());
+        document.put("jugadorId", jugadorId);
+
+        data.set("fecha", Instant.now());
+        data.push("tablero.cartas."+jugadorId, document);
+        template.updateFirst(getFilterByAggregateId(event),data, COLLECTION_VIEW).block();
+    }
+
+    @EventListener
+    public void handleRondaCreada(RondaCreada event) {
+        var data = new Update();
+        var ronda = event.getRonda().value();
+        var document = new Document();
+        var jugadores = ronda.jugadores().stream()
+                .map(Identity::value)
+                .collect(Collectors.toList());
+
+        document.put("jugadores", jugadores);
+        document.put("numero", ronda.numero());
+
+        data.set("fecha", Instant.now());
+        data.set("tiempo", event.getTiempo());
+        data.set("ronda", document);
+        template.updateFirst(getFilterByAggregateId(event),data, COLLECTION_VIEW).block();
+    }
+
+    @EventListener
+    public void handleTiempoCambiadoDelTablero(TiempoCambiadoDelTablero event){
+        var data = new Update();
+        data.set("fecha", Instant.now());
+        data.set("tiempo", event.getTiempo());
+        data.set("ronda.estaIniciada", true);
+
+        template.updateFirst(getFilterByAggregateId(event),data, COLLECTION_VIEW).block();
+    }
+
+    @EventListener
+    public void handleRondaTerminada(RondaTerminada event){
+        var data = new Update();
+        data.set("fecha", Instant.now());
+        data.set("tiempo", 0);
+        data.set("ronda.estaIniciada", false);
+        data.set("tablero.cartas", new HashMap<>());
+        data.set("tablero.habilitado", false);
+        data.set("ronda.jugadores", event.getJugadorIds());
+
+        template.updateFirst(getFilterByAggregateId(event),data, COLLECTION_VIEW).block();
+    }
+
+    @EventListener
+    public void handleRondaIniciada(RondaIniciada event){
+        var data = new Update();
+        data.set("fecha", Instant.now());
+        data.set("tablero.habilitado", true);
+
+        template.updateFirst(getFilterByAggregateId(event),data, COLLECTION_VIEW).block();
+    }
+
+    @EventListener
+    public void handleJuegoFinalizado(JuegoFinalizado event){
+        var data = new Update();
+        data.set("fecha", Instant.now());
+        data.set("ganador.alias", event.getAlias());
+        data.set("ganador.jugadorId", event.getJugadorId().value());
+        data.set("finalizado", true);
+
+        template.updateFirst(getFilterByAggregateId(event),data, COLLECTION_VIEW).block();
+    }
+
 
     private Query getFilterByAggregateId(DomainEvent event) {
         return new Query(

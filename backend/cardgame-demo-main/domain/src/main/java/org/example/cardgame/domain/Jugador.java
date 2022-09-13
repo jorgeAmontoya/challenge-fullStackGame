@@ -7,9 +7,11 @@ import org.example.cardgame.domain.values.Mazo;
 
 import java.util.Objects;
 
+
 public class Jugador extends Entity<JugadorId> {
     private final String email;
     private Mazo mazo;
+
 
     public Jugador(JugadorId entityId, String email, Mazo mazo) {
         super(entityId);
@@ -20,13 +22,16 @@ public class Jugador extends Entity<JugadorId> {
         }
     }
 
+
     public void agregarCartaAMazo(Carta carta) {
         mazo = mazo.nuevaCarta(carta);
     }
 
+
     public void quitarCartaDeMazo(Carta carta) {
         mazo = mazo.retirarCarta(carta);
     }
+
 
     public String alias() {
         return email;
