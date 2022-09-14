@@ -35,61 +35,19 @@ export class TableroComponent implements OnInit {
     private router: Router) { }
 
 
-  /*ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      this.juegoId = params['id'];
-      console.log(this.juegoId);
-      this.uid = this.authService.user.uid;
-      this.juegoService$.getMiMazo(this.uid, this.juegoId).subscribe((element:any) => {
-      this.cartasDelJugador = element.cartas;
-      });
-
-      this.ws.conection(this.juegoId).subscribe({  
-        next: (event:any) => {
-                
-          debugger;
-          if (event.type === 'cardgame.tiempocambiadodeltablero') {
-            this.tiempo = event.tiempo;
-          }
-          if (event.type === 'cardgame.rondacreada') {
-            this.tiempo = event.tiempo;
-            this.jugadoresRonda = event.ronda.jugadores.length;
-            this.numeroRonda = event.ronda.numero;
-          }
-
-          if(event.type === 'cardgame.rondainiciada'){
-            this.roundStarted = false;
-          }
-
-        },
-        error: (err:any) => console.log(err),
-        complete: () => console.log('complete')
-      });
-    
-    });
-
-    this.juegoService$.getTablero(this.juegoId).subscribe((element) => {
-      this.cartasDelTablero = Object.entries(element.tablero.cartas).map((a: any) => {
-        return a[1];
-      });
-      this.tiempo = element.tiempo;
-      this.jugadoresRonda = element.ronda.jugadores.length;
-      this.jugadoresTablero = element.tablero.jugadores.length;
-      this.numeroRonda = element.ronda.numero;
-    });
-  }
-
-
-  iniciarRonda(){
-    this.ws.conection(this.juegoId).subscribe(data => console.log(data));
-    this.juegoService$.iniciarRonda({
-      juegoId: this.juegoId
-
-    }).subscribe( x => console.log(x));
-  }*/
+  
   ngOnInit(){
     this.route.params.subscribe((params) => {
       this.juegoId = params['id'];
+
+      this.uid = this.authService.obtenerUsuarioSesion().uid;
+      console.log(this.uid)
+      this.juegoService$.getMiMazo(this.uid,this.juegoId).subscribe((element:any) => {
+        this.cartasDelJugador= element.cartas;
+        console.log(this.cartasDelJugador);
+      });
+
+     
 
      
       
@@ -100,39 +58,37 @@ export class TableroComponent implements OnInit {
           }
           if(event.type === 'cardgame.rondainiciada'){
             this.roundStarted = false;
-          }
-
-
-
-          //if(event.type==='cardgame.jugadoragregado')
-
-       
+          }  
+          if(event.type === 'cardgame.ponercartaentablero'){
+            this.cartasDelTablero.push({
+              cartaId: event.carta.cartaId,
+              poder: event.carta.poder,
+              estaOculta: event.carta.estaOculta,
+              estaHabilitada: event.carta,
+              url:event.carta.url
+            });
+          } 
+          if (event.type === 'cardgame.cartaquitadadelmazo'){
+            this.cartasDelJugador = this.cartasDelJugador
+            .filter((item) =>item.cartaId !== event.carta.cartaId.uuid)
+          }    
         }
     })
 
-    this.juegoService$.getTablero(this.juegoId).subscribe(event=>{
-      this.tiempo = event.tiempo;
-      this.jugadoresRonda = event.tablero.jugadores.length;
-      this.jugadoresTablero = event.tablero.jugadores.length;
-      this.numeroRonda = event.ronda.numero;
-
-      //l
-     
-
-      event.tablero.jugadores.forEach(id => {
-        this.juegoService$.getMazoPorJugador(id).subscribe(mazo => {console.log("mazo:", mazo);})
-      })
-     
-     
-    });
+ 
     })
 
-   
+    this.juegoService$.getTablero(this.juegoId).subscribe((event)=>{
+     
+    this.tiempo = event.tiempo;
+    this.jugadoresRonda = event.tablero.jugadores.length;
+    this.jugadoresTablero = event.tablero.jugadores.length;
+    this.numeroRonda = event.ronda.numero;   
+  });
 
     
   }
     iniciarRonda(){
-    //  this.ws.conection(this.juegoId).subscribe();
       this.juegoService$.iniciarRonda({
         juegoId: this.juegoId,
   
@@ -140,9 +96,13 @@ export class TableroComponent implements OnInit {
       
     } 
 
-/*btnLogout(): void{
-  this.auth$.logout();*/
 
 
-
+    ponerCarta(cardId:string){
+      this.juegoService$.ponerCartaEnTablero({
+        juegoId:this.juegoId,
+        cartaId:cardId,
+        jugadorId: this.uid
+      }).subscribe(e=>console.log(e))
+    }
 }

@@ -17,32 +17,30 @@
                             </button>    
                     </div>
                 <div _ngcontent-mjj-c148="" class="cartasDelTablero">
-                   
-                    <div class="three">
-                    <button _ngcontent-mjj-c148="" mat-button="" color="primary" class="mat-focus-indicator mat-button mat-button-base mat-primary" ng-reflect-color="primary" ng-reflect-disabled="false">Partida
-                        <h1>jorge</h1>
-                    </button>
-                        <br>   
-                    <br>
-                    <div class="six">
-                    </div>
+                   <div class="tablero">
+                    <h1 class = "title">Tablero</h1>
+                        <div class="three"  class="card" *ngFor="let card of cartasDelTablero" style="width: 18rem;background: lightblue; " >
+                                <p>poder {{card.poder}}</p>
+                                <img src="{{card.url}}"/>
+                        
+                                <br>   
+                        
+                        </div>
                     </div>
                     <div class="four"> <button _ngcontent-mjj-c148="" mat-button="" color="primary" class="mat-focus-indicator mat-button mat-button-base mat-primary" ng-reflect-color="primary" ng-reflect-disabled="false">Mazo</button>
                             <br>
 
 
-                            <div class="card" style="width: 18rem;">
-                                
-                                <img class="card-img-top" src="https://dam.smashmexico.com.mx/wp-content/uploads/2022/05/hulk-thor-mejores-peleas-historia-marvel-cover.jpg" alt="Card image cap">
-                                <img class="card-img-top" src="https://i.pinimg.com/originals/78/0b/ab/780bab637bcf566162d4a1d19ddbc7a6.jpg" alt="Card image cap">
-                                
+                            <div class="card" *ngFor="let card of cartasDelJugador" style="width: 18rem; ">
+                                <p>poder {{card.poder}}</p>
+                                <img src="{{card.url}}"/>
+                                <button class="btn btn-primary" (click)="ponerCarta(card.cartaId)">poner</button>
                               </div>
 
-                              <a class="btn btn-primary">poner</a>
                                                 
                     </div>
                                  
-                    </div> 
+                </div> 
 
             </main>
         </div>

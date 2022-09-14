@@ -51,5 +51,7 @@ export class JuegoServiceService {
     return this.http.post('http://localhost:8080/juego/ronda/iniciar/', command)
   }
 
-  
+  ponerCartaEnTablero(command: any){
+    return this.http.post('http://localhost:8080/juego/poner', command)
+  }
 }
