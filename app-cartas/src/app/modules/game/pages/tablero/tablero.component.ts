@@ -12,16 +12,18 @@ import { WebSocketserviceTsService } from '../../services/web-socketservice.ts.s
 })
 export class TableroComponent implements OnInit {
 
-  cartasDelJugador: Carta[] = [];
-  cartasDelTablero: Carta[] = [];
-  cartasJugadorTablero: string[] = []
+  juegoId: string = "";
+  uid: string = "";
   tiempo: number = 0;
   jugadoresRonda: number = 0;
   jugadoresTablero: number = 0;
   numeroRonda: number = 0;
-  juegoId: string = "";
-  uid: string = "";
   roundStarted:boolean = false;
+  cartasDelJugador: Carta[] = [];
+  cartasDelTablero: Carta[] = [];
+  
+  
+  cartasJugadorTablero: string[] = []
   ganadorAlias:string = "";
   ganador:boolean = false;
 
@@ -53,12 +55,7 @@ export class TableroComponent implements OnInit {
       
       this.ws.conection(this.juegoId).subscribe({
         next: (event:any) => {
-          if (event.type === 'cardgame.tiempocambiadodeltablero') {
-            this.tiempo = event.tiempo;
-          }
-          if(event.type === 'cardgame.rondainiciada'){
-            this.roundStarted = false;
-          }  
+
           if(event.type === 'cardgame.ponercartaentablero'){
             this.cartasDelTablero.push({
               cartaId: event.carta.cartaId,
@@ -68,10 +65,25 @@ export class TableroComponent implements OnInit {
               url:event.carta.url
             });
           } 
+
           if (event.type === 'cardgame.cartaquitadadelmazo'){
             this.cartasDelJugador = this.cartasDelJugador
             .filter((item) =>item.cartaId !== event.carta.cartaId.uuid)
-          }    
+          } 
+
+          if (event.type === 'cardgame.tiempocambiadodeltablero') {
+            this.tiempo = event.tiempo;
+          }
+          if(event.type === 'cardgame.rondainiciada'){
+            this.roundStarted = true;
+          }  
+
+          if(event.type === 'cardgame.rondaterminada'){
+            this.roundStarted = false;
+           
+          }
+
+            
         }
     })
 
@@ -89,6 +101,7 @@ export class TableroComponent implements OnInit {
     
   }
     iniciarRonda(){
+      this.ws.conection(this.juegoId).subscribe(data => console.log(data));
       this.juegoService$.iniciarRonda({
         juegoId: this.juegoId,
   

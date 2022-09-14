@@ -6,6 +6,8 @@ import { environment } from 'src/environments/environment';
 import { CrearRondaCommand } from '../../shared/commands/CrearRondaCommand';
 import { IniciarJuegoCommand } from '../../shared/commands/IniciarJuegoCommand';
 import { TableroModel } from '../../shared/models/tablero';
+import { JuegoModel } from '../../shared/models/juego';
+import { modeloJuego } from '../../shared/models/modeloJuego';
 
 @Injectable({
   providedIn: 'root'
@@ -53,5 +55,9 @@ export class JuegoServiceService {
 
   ponerCartaEnTablero(command: any){
     return this.http.post('http://localhost:8080/juego/poner', command)
+  }
+
+  getJuegos(): Observable<modeloJuego[]> {
+    return this.http.get<modeloJuego[]>('http://localhost:8080/juegos/');
   }
 }
