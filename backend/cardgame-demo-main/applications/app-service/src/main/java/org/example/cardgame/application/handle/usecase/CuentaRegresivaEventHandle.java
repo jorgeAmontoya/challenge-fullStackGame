@@ -22,7 +22,7 @@ public class CuentaRegresivaEventHandle {
         this.handle = handle;
     }
 
-    @Async
+   // @Async
     @EventListener
     public void handleIniciarCuentaRegresiva(RondaIniciada event) {
         //handle.apply(usecase.apply(Mono.just(event))).block();

@@ -85,7 +85,10 @@ export class TableroComponent implements OnInit, OnDestroy {
           this.ganador = true;
           this.ganadorRonda=event.alias;
             alert("Ganador del Juego: "+this.ganadorRonda)
-            this.router.navigate(['listaJugadores']);
+            //this.router.navigate(['listaJugadores']);
+            setTimeout(() => { 
+              this.router.navigate(['listaJugadores']);
+            },300);
         }
         if(event.type === 'cardgame.rondaterminada'){
 
