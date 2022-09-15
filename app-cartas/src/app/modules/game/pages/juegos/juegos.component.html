@@ -3,16 +3,19 @@
 <div class="image1">
   <div class="card">
     <div class="card2"  *ngFor="let juego of juegos">
-        <h5 class="card-title">Id Del Juego:  {{juego.id}}</h5>
-        <h5 class="card-title">Estado del Juego:   {{juego.iniciado}}</h5>
-        <p class="card-text">Cantidad de Jugadores: {{juego.cantidadJugadores}}</p>
+      <h5 class="card-title">Id Del Juego:  {{juego.id}}</h5>
+      <h5 class="card-title">Estado del Juego:   {{juego.iniciado}}</h5>
+      <p class="card-text">Cantidad de Jugadores: {{juego.cantidadJugadores}}</p>
+      <p class="card-title"> finalizado  {{juego.finalizado}}</p>
+      <p class="card-title">   {{juego.Jugadores}}</p>
+      <ng-container *ngIf="!juego.finalizado">
         <ng-container *ngIf="!juego.iniciado">
-          <button (click)="iniciar(juego.id)" mat-flat-button color="primary">Iniciar</button>
+         <button (click)="iniciar(juego.id)" mat-flat-button color="primary">Iniciar</button>
         </ng-container>
-      <ng-container *ngIf="juego.iniciado">
-        <button (click)="entrar(juego.id)" mat-flat-button color="primary">Entrar</button>
+        <ng-container *ngIf="juego.iniciado">
+          <button (click)="entrar(juego.id)" mat-flat-button color="primary">Entrar</button>
+        </ng-container>
       </ng-container>
-      
     </div>
   </div>
 </div>

@@ -1,6 +1,7 @@
 export interface modeloJuego {
     id:string,
     iniciado: boolean,
+    finalizado: boolean,
     cantidadJugadores: number,
     jugadores: Map<string,Jugador>
   }

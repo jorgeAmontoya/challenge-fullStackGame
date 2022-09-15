@@ -4,6 +4,7 @@ import { Carta } from 'src/app/modules/shared/models/mazo';
 import { AuthService } from 'src/app/modules/shared/services/auth.service';
 import { JuegoServiceService } from '../../services/juego-service.service';
 import { WebSocketserviceTsService } from '../../services/web-socketservice.ts.service';
+import swal from'sweetalert2';
 
 @Component({
   selector: 'app-tablero',
@@ -84,8 +85,9 @@ export class TableroComponent implements OnInit, OnDestroy {
           this.ganadorAlias = "Ganador:" + event.alias;
           this.ganador = true;
           this.ganadorRonda=event.alias;
-            alert("Ganador del Juego: "+this.ganadorRonda)
+           // alert("Ganador del Juego: "+this.ganadorRonda)
             //this.router.navigate(['listaJugadores']);
+            swal.fire('ganador del juego',this.ganadorRonda);
             setTimeout(() => { 
               this.router.navigate(['listaJugadores']);
             },300);
