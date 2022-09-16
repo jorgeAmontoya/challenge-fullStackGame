@@ -31,6 +31,8 @@ export class TableroComponent implements OnInit, OnDestroy {
   jugadorSeleccionado: string =""
   mostrarModal:boolean = true;
   jugadoresEnLaRonda: any[] = new Array<any>();
+  
+  arregloSeleccionado: any[] = new Array<any>();
 
   // constructor
   constructor(public juegoService$: JuegoServiceService,
@@ -103,8 +105,10 @@ export class TableroComponent implements OnInit, OnDestroy {
 
         if (event.type === 'cardgame.tiempocambiadodeltablero') {
           this.tiempo = event.tiempo;
-          if (event.tiempo == 1 && this.numeroRonda == 3 && this.jugadorSeleccionado == this.uid) {
+          if (event.tiempo == 1 && this.numeroRonda >= 3 && this.jugadorSeleccionado == this.uid) {
+            debugger;
             this.mostrarModal = true;
+            
           }
         }
 
@@ -132,7 +136,11 @@ export class TableroComponent implements OnInit, OnDestroy {
     }
   })
 
- this.juegoService$.showModal.subscribe(event => this.mostrarModal = event.valueOf())
+ this.juegoService$.showModal.subscribe(
+   event => this.mostrarModal = event.valueOf()
+   
+
+ )
 }
 
 ngOnDestroy(): void {
@@ -168,8 +176,29 @@ getTablero(){
     
   } 
 
+selecionarJugadores(id:string): void{
+
+}
+
   Cerrar(){
     this.juegoService$.showModal.emit(false);
+    debugger;
+
+    if (this.arregloSeleccionado.length >=1 && this.arregloSeleccionado.length <=2)
+    {
+      //alert("Jugador potenciado",this.arregloSeleccionado);
+      const body ={
+        "juegoId": this.juegoId,
+        "jugadoresSeleccionados": this.arregloSeleccionado,
+        "jugadorPotenciado": this.uid
+      }
+      this.juegoService$.finalizarRonda(body);
+     // alert("Jugador potenciado",body);
+    }
+    else
+    {
+      alert("Seleccione un jugador")
+    }    
   }
 
   ponerCarta(cardId:string){

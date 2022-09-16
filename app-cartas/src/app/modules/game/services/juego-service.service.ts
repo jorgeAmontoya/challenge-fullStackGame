@@ -64,4 +64,9 @@ export class JuegoServiceService {
   }
 
 
+  finalizarRonda(command: any){
+    return this.http.post( 'http://localhost:8080/juego/ronda/finalizar', command);
+  }
+
+
 }

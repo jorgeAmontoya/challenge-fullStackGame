@@ -6,12 +6,19 @@
     <h2>Seleccione 2 jugadores</h2>
     <form id="frmJugadores">      
         <div class="select">
-          <select *ngFor="let id of jugadoresEnLaRonda">
+          <select *ngFor="let id of jugadoresEnLaRonda" multiple>
             <option>
               {{id.uuid}}
             </option>
           </select>
         </div>
+       <!--
+        <div multiple *ngFor="let id of jugadoresEnLaRonda">
+            <button (click)="selecionarJugadores({{id.uuid}})">
+              {{id.uuid}}
+            </button>
+        </div> 
+        -->
         <div class="cont-button">
           <button class="btn-3" (click)="Cerrar()"   type="button"><span>Confirmar</span></button>
         </div>
