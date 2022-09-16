@@ -48,7 +48,7 @@ class IniciarJuegoUseCaseTest {
     }
 
     private Flux<DomainEvent> juegoCreado() {
-        var event = new JuegoCreado(JugadorId.of("Jugador01"));
+        var event = new JuegoCreado(JugadorId.of("Jugador02"));
         event.setAggregateRootId("juegoId01");
         return Flux.just(event);
     }

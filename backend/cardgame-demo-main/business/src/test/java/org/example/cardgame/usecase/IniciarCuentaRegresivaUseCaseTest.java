@@ -147,7 +147,7 @@ class IniciarCuentaRegresivaUseCaseTest {
                         Set.of(JugadorId.of("AAAA"),
                                 JugadorId.of("BBBB")
                         )
-                ), 3);
+                        ), 3);
         event5.setAggregateRootId("XXXX");
 
         var event6 = new RondaIniciada();
@@ -188,8 +188,7 @@ class IniciarCuentaRegresivaUseCaseTest {
                 new Ronda(1,
                         Set.of(JugadorId.of("AAAA"),
                                 JugadorId.of("BBBB")
-                        )
-                ), 3);
+                        )), 3);
         event3.setAggregateRootId("XXXX");
 
         return Flux.just(event, event2, event3);

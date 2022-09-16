@@ -17,6 +17,7 @@ export class TableroComponent implements OnInit, OnDestroy {
   uid: string = "";
   tiempo: number = 0;
   jugadoresRonda: number = 0;
+
   jugadoresTablero: number = 0;
   numeroRonda: number = 0;
   roundStarted:boolean = false;
@@ -27,6 +28,9 @@ export class TableroComponent implements OnInit, OnDestroy {
   cartasJugadorTablero: string[] = []
   ganadorAlias:string = "";
   ganador:boolean = false;
+  jugadorSeleccionado: string =""
+  mostrarModal:boolean = true;
+  jugadoresEnLaRonda: any[] = new Array<any>();
 
   // constructor
   constructor(public juegoService$: JuegoServiceService,
@@ -67,7 +71,10 @@ export class TableroComponent implements OnInit, OnDestroy {
             estaOculta: event.carta.estaOculta,
             estaHabilitada: event.carta,
             url:event.carta.url
+              
+
           });
+         
         } 
 
         if (event.type === 'cardgame.cartaquitadadelmazo'){
@@ -76,9 +83,19 @@ export class TableroComponent implements OnInit, OnDestroy {
         } 
 
         if (event.type === 'cardgame.rondacreada') {
+          debugger;
           this.tiempo = event.tiempo;
           this.jugadoresRonda = event.ronda.jugadores.length
           this.numeroRonda=event.ronda.numero;
+          //this.jugadoresEnLaRonda = event.ronda.jugadores;
+
+          this.jugadoresEnLaRonda = event.ronda.jugadores
+          .filter((jugador: { uuid: string; }) => jugador.uuid != this.uid);
+
+      
+
+
+            
         }
 
         if(event.type === 'cardgame.juegofinalizado') {
@@ -92,6 +109,21 @@ export class TableroComponent implements OnInit, OnDestroy {
               this.router.navigate(['listaJugadores']);
             },300);
         }
+
+        if (event.type === 'cardgame.JugadorSeleccionado') {
+          this.jugadorSeleccionado = event.jugadorSeleccionado;
+        }
+
+        if (event.type === 'cardgame.tiempocambiadodeltablero') {
+          this.tiempo = event.tiempo;
+          if (event.tiempo == 1 && this.numeroRonda == 3 && this.jugadorSeleccionado == this.uid) {
+            //this.router.navigate(['modal']);
+
+            //alert("seleciona un jugador");
+            this.mostrarModal = true;
+          }
+        }
+
         if(event.type === 'cardgame.rondaterminada'){
 
           this.cartasDelTablero = [];
@@ -117,21 +149,22 @@ export class TableroComponent implements OnInit, OnDestroy {
     }
   })
 
- 
+ this.juegoService$.showModal.subscribe(event => this.mostrarModal = event.valueOf())
 }
 
 ngOnDestroy(): void {
   this.ws.closeConexion();
 }
 
-  
+
 getTablero(){
   this.juegoService$.getTablero(this.juegoId).subscribe((event)=>{
      
     this.tiempo = event.tiempo;
     this.jugadoresRonda = event.tablero.jugadores.length;
     this.jugadoresTablero = event.tablero.jugadores.length;
-    this.numeroRonda = event.ronda.numero;   
+    this.numeroRonda = event.ronda.numero; 
+    this.jugadoresEnLaRonda = event.ronda.jugadores;  
   })
 }
 
@@ -154,6 +187,10 @@ getTablero(){
     }).subscribe();
     
   } 
+
+  Cerrar(){
+    this.juegoService$.showModal.emit(false);
+  }
 
   ponerCarta(cardId:string){
     this.juegoService$.ponerCartaEnTablero({

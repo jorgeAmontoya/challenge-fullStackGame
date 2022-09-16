@@ -1,8 +1,46 @@
 <app-navbar></app-navbar>
+ <!-- <app-modal *ngIf="mostrarModal"  ></app-modal>-->
+
 <h1 class = "title">Crear Juego</h1>
+
 <h1 class = "title">{{ganadorAlias}}</h1>
 
-<div class="container">
+
+<div class="container" >
+
+    
+
+    <div class="contenedor" *ngIf="mostrarModal">
+
+        <h2>Seleccione 2 jugadores</h2>
+      
+        <form id="frmJugadores">
+      
+          <div class="select">
+      
+            <select *ngFor="let id of jugadoresEnLaRonda">
+              <option>
+               {{id.uuid}}
+              </option>
+              
+            </select>
+      
+          </div>
+          <div class="cont-button">
+            <button class="btn-3" (click)="Cerrar()"   type="button"><span>Confirmar</span></button>
+          </div>
+      
+        </form>
+      
+      </div>
+
+
+
+
+
+
+
+    
     <div _ngcontent-mjj-c148="" class="container-fluid">
         <div _ngcontent-mjj-c148="" class="row">
             <main _ngcontent-mjj-c148="" role="main" class="col-md-7 ml-sm-auto col-lg-9 px-4">

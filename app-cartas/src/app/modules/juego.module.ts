@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { JuegoRoutingsModule } from './juego-routing.module'; 
 import { NavbarComponent } from './game/components/navbar/navbar.component';
+import { ModalComponent } from './game/components/modal/modal.component';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { NavbarComponent } from './game/components/navbar/navbar.component';
   HomeComponent,
   JuegosComponent,
   TableroComponent,
-  NavbarComponent,]
+  NavbarComponent,
+  ModalComponent,]
 })
 export class GameModuleModule { }

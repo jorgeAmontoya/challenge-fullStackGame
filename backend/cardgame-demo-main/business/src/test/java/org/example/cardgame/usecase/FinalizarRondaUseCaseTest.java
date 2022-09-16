@@ -16,7 +16,6 @@ import reactor.test.StepVerifier;
 
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -98,7 +97,7 @@ class FinalizarRondaUseCaseTest {
                         Set.of(JugadorId.of("AAAA"),
                                 JugadorId.of("BBBB")
                         )
-                ), 80);
+                        ), 80);
         event5.setAggregateRootId("XXXX");
 
         var event6 = new RondaIniciada();

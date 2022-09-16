@@ -106,4 +106,8 @@ public class Juego extends AggregateEvent<JuegoId> {
         appendChange(new JuegoFinalizado(jugadorId, alias)).apply();
 
     }
+
+    public void selecciocarJuador(String jugadorId){
+        appendChange(new JugadorSeleccionado(jugadorId)).apply();
+    }
 }

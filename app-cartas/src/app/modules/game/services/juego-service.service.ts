@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { JuegoModel22 } from '../models/juego.model'; 
 import { Observable } from 'rxjs';
@@ -13,6 +13,8 @@ import { modeloJuego } from '../../shared/models/modeloJuego';
   providedIn: 'root'
 })
 export class JuegoServiceService {
+
+  @Output() showModal: EventEmitter<Boolean> = new EventEmitter();
 
   constructor(private http: HttpClient) { }
 
@@ -60,4 +62,6 @@ export class JuegoServiceService {
   getJuegos(): Observable<modeloJuego[]> {
     return this.http.get<modeloJuego[]>('http://localhost:8080/juegos/');
   }
+
+
 }
