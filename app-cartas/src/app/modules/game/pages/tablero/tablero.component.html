@@ -1,89 +1,59 @@
 <app-navbar></app-navbar>
- <!-- <app-modal *ngIf="mostrarModal"  ></app-modal>-->
-
 <h1 class = "title">Crear Juego</h1>
-
 <h1 class = "title">{{ganadorAlias}}</h1>
-
-
 <div class="container" >
-
-    
-
-    <div class="contenedor" *ngIf="mostrarModal">
-
-        <h2>Seleccione 2 jugadores</h2>
-      
-        <form id="frmJugadores">
-      
-          <div class="select">
-      
-            <select *ngFor="let id of jugadoresEnLaRonda">
-              <option>
-               {{id.uuid}}
-              </option>
-              
-            </select>
-      
-          </div>
-          <div class="cont-button">
-            <button class="btn-3" (click)="Cerrar()"   type="button"><span>Confirmar</span></button>
-          </div>
-      
-        </form>
-      
-      </div>
-
-
-
-
-
-
-
-    
-    <div _ngcontent-mjj-c148="" class="container-fluid">
-        <div _ngcontent-mjj-c148="" class="row">
-            <main _ngcontent-mjj-c148="" role="main" class="col-md-7 ml-sm-auto col-lg-9 px-4">
-                    <div _ngcontent-mjj-c148="">
-                        <h3 _ngcontent-mjj-c148=""></h3>
-                    </div>
-                    <div _ngcontent-mjj-c148="" class="infoBar">
-                            <h4 _ngcontent-mjj-c148="">RONDA # {{numeroRonda}} Jugadores [{{jugadoresRonda}}/{{jugadoresTablero}}]</h4>
-                            <h1 _ngcontent-mjj-c148="" class="h2">{{tiempo}} segundos</h1>
-                            <button _ngcontent-mjj-c148="" mat-button="" color="primary" class="mat-focus-indicator mat-button mat-button-base mat-primary" ng-reflect-color="primary" ng-reflect-disabled="false">
-                                <span class="mat-button-wrapper" (click)="iniciarRonda()" > INICIAR </span>
-                                <span matripple="" class="mat-ripple mat-button-ripple" ng-reflect-disabled="false" ng-reflect-centered="false" ng-reflect-trigger="[object HTMLButtonElement]"></span>
-                                <span class="mat-button-focus-overlay"></span>
-                            </button>    
-                    </div>
-                <div _ngcontent-mjj-c148="" class="cartasDelTablero">
-                   <div class="tablero">
-                    <h1 class = "title">Tablero</h1>
-                        <div class="three"  class="card" *ngFor="let card of cartasDelTablero" style="width: 18rem;background: lightblue; " >
-                                <!--<p>poder {{card.poder}}</p>
-                                <img src="{{card.url}}"/>-->
-                                <img src = '../assets/imagenes/doctorString.jpg'>
-                        
-                                <br>   
-                        
-                        </div>
-                    </div>
-                    <div class="four"> <button _ngcontent-mjj-c148="" mat-button="" color="primary" class="mat-focus-indicator mat-button mat-button-base mat-primary" ng-reflect-color="primary" ng-reflect-disabled="false">Mazo</button>
-                            <br>
-
-
-                            <div class="card" *ngFor="let card of cartasDelJugador" style="width: 18rem; ">
-                                <p>poder {{card.poder}}</p>
-                                <img src="{{card.url}}"/>
-                                <button class="btn btn-primary" (click)="ponerCarta(card.cartaId)">poner</button>
-                              </div>
-
-                                                
-                    </div>
-                                 
-                </div> 
-
-            </main>
+  <div class="contenedor" *ngIf="mostrarModal">
+    <h2>Seleccione 2 jugadores</h2>
+    <form id="frmJugadores">      
+        <div class="select">
+          <select *ngFor="let id of jugadoresEnLaRonda">
+            <option>
+              {{id.uuid}}
+            </option>
+          </select>
         </div>
-    </div>
+        <div class="cont-button">
+          <button class="btn-3" (click)="Cerrar()"   type="button"><span>Confirmar</span></button>
+        </div>
+    </form>      
+  </div>
+
+  <div _ngcontent-mjj-c148="" class="container-fluid">
+      <div _ngcontent-mjj-c148="" class="row">
+          <main _ngcontent-mjj-c148="" role="main" class="col-md-7 ml-sm-auto col-lg-9 px-4">
+          <div _ngcontent-mjj-c148="">
+              <h3 _ngcontent-mjj-c148=""></h3>
+          </div>
+          <div _ngcontent-mjj-c148="" class="infoBar">
+              <h4 _ngcontent-mjj-c148="">RONDA # {{numeroRonda}} Jugadores [{{jugadoresRonda}}/{{jugadoresTablero}}]</h4>
+              <h1 _ngcontent-mjj-c148="" class="h2">{{tiempo}} segundos</h1>
+              <button _ngcontent-mjj-c148="" mat-button="" color="primary" class="mat-focus-indicator mat-button mat-button-base mat-primary" ng-reflect-color="primary" ng-reflect-disabled="false">
+                  <span class="mat-button-wrapper" (click)="iniciarRonda()" > INICIAR </span>
+                  <span matripple="" class="mat-ripple mat-button-ripple" ng-reflect-disabled="false" ng-reflect-centered="false" ng-reflect-trigger="[object HTMLButtonElement]"></span>
+                  <span class="mat-button-focus-overlay"></span>
+              </button>    
+          </div>
+          <div _ngcontent-mjj-c148="" class="cartasDelTablero">
+              <div class="tablero">
+              <h1 class = "title">Tablero</h1>
+                  <div class="three"  class="card" *ngFor="let card of cartasDelTablero" style="width: 18rem;background: lightblue; " >
+                      <!--<p>poder {{card.poder}}</p>
+                      <img src="{{card.url}}"/>-->
+                      <img src = '../assets/imagenes/doctorString.jpg'>                  
+                      <br>                    
+                  </div>
+              </div>
+              <div class="four"> <button _ngcontent-mjj-c148="" mat-button="" color="primary" class="mat-focus-indicator mat-button mat-button-base mat-primary" ng-reflect-color="primary" ng-reflect-disabled="false">Mazo</button>
+                  <br>
+                  <div class="card" *ngFor="let card of cartasDelJugador" style="width: 18rem; ">
+                      <p>poder {{card.poder}}</p>
+                      <img src="{{card.url}}"/>
+                      <button class="btn btn-primary" (click)="ponerCarta(card.cartaId)">poner</button>
+                    </div>                                         
+              </div>                            
+          </div> 
+
+        </main>
+      </div>
+  </div>
 </div>

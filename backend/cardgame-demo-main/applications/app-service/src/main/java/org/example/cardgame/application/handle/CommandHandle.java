@@ -1,11 +1,7 @@
 package org.example.cardgame.application.handle;
 
 import org.example.cardgame.domain.command.*;
-import org.example.cardgame.usecase.CrearJuegoUseCase;
-import org.example.cardgame.usecase.CrearRondaUseCase;
-import org.example.cardgame.usecase.IniciarJuegoUseCase;
-import org.example.cardgame.usecase.IniciarRondaUseCase;
-import org.example.cardgame.usecase.PonerCartaEnTableroUseCase;
+import org.example.cardgame.usecase.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -75,7 +71,16 @@ public class CommandHandle {
 
         );
     }
-
+    @Bean
+    public RouterFunction<ServerResponse> finalizarRonda(FinalizarRondaUseCase usecase) {
+        return route(
+                POST("/juego/ronda/finalizar").and(accept(MediaType.APPLICATION_JSON)),
+                request -> usecase.andThen(integrationHandle)
+                        .apply(request.bodyToMono(FinalizarRondaCommand.class))
+                        .then(ServerResponse.ok().build())
+                        .onErrorResume(errorHandler::badRequest)
+        );
+    }
 
     @Bean
     public RouterFunction<ServerResponse> crearRonda(CrearRondaUseCase usecase) {
@@ -88,6 +93,8 @@ public class CommandHandle {
 
         );
     }
+
+
 
 
 

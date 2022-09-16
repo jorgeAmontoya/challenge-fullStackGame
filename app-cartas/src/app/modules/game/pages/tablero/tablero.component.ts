@@ -20,12 +20,12 @@ export class TableroComponent implements OnInit, OnDestroy {
 
   jugadoresTablero: number = 0;
   numeroRonda: number = 0;
-  roundStarted:boolean = false;
+ // roundStarted:boolean = false;
   cartasDelJugador: Carta[] = [];
   cartasDelTablero: Carta[] = [];
   
   ganadorRonda: string = "";
-  cartasJugadorTablero: string[] = []
+  //cartasJugadorTablero: string[] = []
   ganadorAlias:string = "";
   ganador:boolean = false;
   jugadorSeleccionado: string =""
@@ -39,9 +39,6 @@ export class TableroComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router
     ) { }
- 
-
-
   
   ngOnInit():void{
     this.route.params.subscribe((params) => {
@@ -58,7 +55,7 @@ export class TableroComponent implements OnInit, OnDestroy {
           this.tiempo = event.tiempo;
         }
         if(event.type === 'cardgame.rondainiciada'){
-          this.roundStarted = true;
+         // this.roundStarted = true;
           this.tiempo = event.tiempo;
           this.numeroRonda=event.ronda.numero; 
           this.cartasDelJugador=this.cartasDelJugador;
@@ -83,27 +80,17 @@ export class TableroComponent implements OnInit, OnDestroy {
         } 
 
         if (event.type === 'cardgame.rondacreada') {
-          debugger;
           this.tiempo = event.tiempo;
           this.jugadoresRonda = event.ronda.jugadores.length
           this.numeroRonda=event.ronda.numero;
-          //this.jugadoresEnLaRonda = event.ronda.jugadores;
-
           this.jugadoresEnLaRonda = event.ronda.jugadores
-          .filter((jugador: { uuid: string; }) => jugador.uuid != this.uid);
-
-      
-
-
-            
+          .filter((jugador: { uuid: string; }) => jugador.uuid != this.uid);            
         }
 
         if(event.type === 'cardgame.juegofinalizado') {
           this.ganadorAlias = "Ganador:" + event.alias;
           this.ganador = true;
           this.ganadorRonda=event.alias;
-           // alert("Ganador del Juego: "+this.ganadorRonda)
-            //this.router.navigate(['listaJugadores']);
             swal.fire('ganador del juego',this.ganadorRonda);
             setTimeout(() => { 
               this.router.navigate(['listaJugadores']);
@@ -117,15 +104,11 @@ export class TableroComponent implements OnInit, OnDestroy {
         if (event.type === 'cardgame.tiempocambiadodeltablero') {
           this.tiempo = event.tiempo;
           if (event.tiempo == 1 && this.numeroRonda == 3 && this.jugadorSeleccionado == this.uid) {
-            //this.router.navigate(['modal']);
-
-            //alert("seleciona un jugador");
             this.mostrarModal = true;
           }
         }
 
         if(event.type === 'cardgame.rondaterminada'){
-
           this.cartasDelTablero = [];
         }
 
@@ -155,8 +138,6 @@ export class TableroComponent implements OnInit, OnDestroy {
 ngOnDestroy(): void {
   this.ws.closeConexion();
 }
-
-
 getTablero(){
   this.juegoService$.getTablero(this.juegoId).subscribe((event)=>{
      
@@ -167,7 +148,6 @@ getTablero(){
     this.jugadoresEnLaRonda = event.ronda.jugadores;  
   })
 }
-
   getMazo() {
     this.juegoService$.getMiMazo(this.uid, this.juegoId).subscribe((element: any) => {
       this.cartasDelJugador = element.cartas
