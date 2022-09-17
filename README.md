@@ -25,4 +25,4 @@ docker start mongodb
 
 docker start rabbitmq
 
-
+link video explicativo Youtube https://youtu.be/qEElKbxP54A
